@@ -16,12 +16,15 @@ namespace APBD10.Services
 
         public void AddDoctor(Doctor doctor)
         {
-            
+            _context.Doctors.Add(doctor);
         }
 
         public void DleteDoctor(int id)
         {
-            throw new NotImplementedException();
+            var doctorToDelete = _context.Doctors
+                                         .Where(doctor => doctor.IdDoctor == id)
+                                         .FirstOrDefault();
+            _context.Doctors.Remove(doctorToDelete);
         }
 
         public IEnumerable<Doctor> GetDoctors()
@@ -29,9 +32,16 @@ namespace APBD10.Services
             return _context.Doctors.ToList();
         }
 
-        public void ModifyDoctor(int id)
+        public void ModifyDoctor(int doctorToModifyId, Doctor newDoctorsParameters)
         {
-            throw new NotImplementedException();
+            var doctorToModify = _context.Doctors
+                                         .Where(doctor => doctor.IdDoctor == doctorToModifyId)
+                                         .FirstOrDefault();
+            doctorToModify.FirstName = newDoctorsParameters.FirstName;
+            doctorToModify.LastName = newDoctorsParameters.LastName;
+            doctorToModify.Email = newDoctorsParameters.Email;
+
+            _context.Doctors.Update(doctorToModify);
         }
     }
 }
