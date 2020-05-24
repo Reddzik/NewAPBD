@@ -18,5 +18,6 @@ namespace APBD10.Models
         public string Description { get; set; }
         [MaxLength(100)]
         public string Type { get; set; }
+        public ICollection<Presciption_Medicament> presciption_Medicaments { get; set; }
     }
 }

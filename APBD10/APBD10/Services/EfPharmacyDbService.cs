@@ -13,7 +13,23 @@ namespace APBD10.Services
         {
             this._context = context;
         }
+
+        public void AddDoctor(Doctor doctor)
+        {
+            
+        }
+
+        public void DleteDoctor(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Doctor> GetDoctors()
+        {
+            return _context.Doctors.ToList();
+        }
+
+        public void ModifyDoctor(int id)
         {
             throw new NotImplementedException();
         }

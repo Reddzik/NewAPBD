@@ -20,6 +20,7 @@ namespace APBD10.Models
         [ForeignKey("Patient")]
         public int? IdPatient { get; set; }
         public Patient Patient { get; set; }
+        public ICollection<Presciption_Medicament> presciption_Medicaments { get; set; }
 
     }
 }
