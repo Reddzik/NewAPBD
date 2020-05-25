@@ -1,4 +1,5 @@
-﻿using APBD10.Models;
+﻿using APBD10.DTOs.Req;
+using APBD10.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,17 @@ namespace APBD10.Services
             this._context = context;
         }
 
-        public void AddDoctor(Doctor doctor)
+        public void AddDoctor(DoctorRequest doctor)
         {
-            _context.Doctors.Add(doctor);
+            var newDoctor = new Doctor
+            {
+                IdDoctor = doctor.IdDoctor,
+                FirstName = doctor.FirstName,
+                LastName = doctor.LastName,
+                Email = doctor.Email,
+                Prescriptions = null,
+            }
+            _context.Doctors.Add(newDoctor);
         }
 
         public void DleteDoctor(int id)
@@ -32,10 +41,10 @@ namespace APBD10.Services
             return _context.Doctors.ToList();
         }
 
-        public void ModifyDoctor(int doctorToModifyId, Doctor newDoctorsParameters)
+        public void ModifyDoctor(DoctorRequest newDoctorsParameters)
         {
             var doctorToModify = _context.Doctors
-                                         .Where(doctor => doctor.IdDoctor == doctorToModifyId)
+                                         .Where(doctor => doctor.IdDoctor == newDoctorsParameters.IdDoctor)
                                          .FirstOrDefault();
             doctorToModify.FirstName = newDoctorsParameters.FirstName;
             doctorToModify.LastName = newDoctorsParameters.LastName;
